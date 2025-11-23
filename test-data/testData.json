@@ -1,0 +1,25 @@
+{
+  "searchExamples": [
+    {
+      "departure": "Select...",
+      "return": "Select..."
+    },
+    {
+      "departure": "July",
+      "return": "July (next year)"
+    },
+    {
+      "departure": "December",
+      "return": "December (next year)"
+    },
+    {
+      "departure": "July",
+      "return": "December (next year)"
+    }
+  ],
+  "promoExamples": {
+    "valid1": "AF3-FJK-418",
+    "valid2": "JJ5-OPQ-320",
+    "invalid": "ABC-123-000"
+  }
+}
