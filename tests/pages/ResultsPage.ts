@@ -10,8 +10,7 @@ export default class ResultsPage {
     }
 
     async getPromoMessageText(): Promise<string> {
-        if (!await (await this.promoMessage).isExisting()) return '';
-        return (await (await this.promoMessage).getText()).trim();
+        return ''
     }
 
     async clickBookNow() {
@@ -21,4 +20,19 @@ export default class ResultsPage {
     async clickLogo() {
         await (await this.logo).click();
     }
+
+    async verifyPromoApplied(code: string, discount: string): Promise<boolean> {
+        const message = await this.getPromoMessageText();
+        return message !== null &&
+           message.includes(code) &&
+           message.includes(`${discount}%`);
+        }
+        
+    async verifyPromoInvalid(code: string): Promise<boolean> {
+        const message = await this.getPromoMessageText();
+        return message !== null &&
+            message.includes('Sorry') &&
+            message.includes(code) &&
+            message.includes('not valid');
+        }
 }

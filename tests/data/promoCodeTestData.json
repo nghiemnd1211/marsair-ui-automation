@@ -1,0 +1,18 @@
+{
+  "valid": [
+    { "code": "AF3-FJK-418", "discount": 30 },
+    { "code": "JJ5-OPQ-320", "discount": 50 },
+    { "code": "CD3-YYY-308", "discount": 30 },
+    { "code": "GH9-AAA-909", "discount": 90 }
+  ],
+  "invalid": [
+    "INVALID123",
+    "AB3-FJK-419",
+    "A3-FJK-418",
+    "AF33-FJK-418",
+    "af3-fjk-418",
+    "AF3-FJK-41",
+    "AF3FJK418",
+    "@#3-$%^-418"
+  ]
+}

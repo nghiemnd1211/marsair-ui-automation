@@ -1,7 +1,8 @@
 export const config = {
     runner: 'local',
     specs: [
-        './features/**/*.feature'
+        // './features/**/*.feature',
+        './src/tests/**/*.ts'
     ],
     maxInstances: 1,
     capabilities: [{
@@ -10,28 +11,20 @@ export const config = {
     }],
     logLevel: 'info',
     bail: 0,
-    baseUrl: 'http://localhost',
     waitforTimeout: 10000,
     connectionRetryTimeout: 120000,
     connectionRetryCount: 3,
 
-    framework: 'cucumber',
+    framework: 'mocha',
     reporters: ['spec'],
 
-    cucumberOpts: {
-        require: ['./step-definitions/*.ts'],
-        requireModule: ['ts-node/register'],
-        backtrace: false,
-        failAmbiguousDefinitions: true,
-        failFast: false,
-        ignoreUndefinedDefinitions: false,
-        strict: true,
+    mochaOpts: {
+        ui: 'bdd',
         timeout: 60000,
-        tagsInTitle: false,
+        require: ['ts-node/register']
     },
 
     services: ['devtools'],
-
 
     autoCompileOpts: {
         autoCompile: true,

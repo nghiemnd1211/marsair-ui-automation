@@ -1,0 +1,21 @@
+{
+  "dateOptions": [
+    "Select...",
+    "July",
+    "July (Next year)",
+    "July (Next two years from now)",
+    "December",
+    "December (Next year)",
+    "December (Next two years from now)"
+  ],
+  "seatAvailabilityScenarios": [
+    {
+      "seatsAvailable": true,
+      "message": "Seats available! Call 0800 MARSAIR to book!"
+    },
+    {
+      "seatsAvailable": false,
+      "message": "Sorry, there are no more seats available."
+    }
+  ]
+}
