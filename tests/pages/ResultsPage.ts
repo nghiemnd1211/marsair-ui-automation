@@ -1,38 +1,34 @@
-export default class ResultsPage {
-    get mainMessage() { return $('#content .message'); }
-    get promoMessage() { return $('#content .promo'); }
-    get bookLink() { return $('a.book-now'); }
-    get logo() { return $('#logo'); }
+import { expect } from 'chai';
+import BasePage from './BasePage';
 
-    async getMainMessageText(): Promise<string> {
-        if (!await (await this.mainMessage).isExisting()) return '';
-        return (await (await this.mainMessage).getText()).trim();
+export default class ResultsPage extends BasePage{
+    get promoMessage() { return $('#promo-message'); }
+    get seatsMessage() { return $('#content p'); }
+    
+    async verifySeatsAvailability(expectedMessage: string): Promise<boolean> {
+        if (!await this.seatsMessage.isExisting()) return false;
+        const text = (await this.seatsMessage.getText()).trim();
+        return text.includes(expectedMessage);
     }
 
-    async getPromoMessageText(): Promise<string> {
-        return ''
+
+    async verifyPromoApplied(code: string, discount: number, expectedMsg: string) {
+        await this.promoMessage.waitForDisplayed({ timeout: 5000 });
+        const actual = await this.promoMessage.getText();
+
+        expect(actual).to.equal(
+            expectedMsg,
+            `Promo message is incorrect.\nExpected: ${expectedMsg}\nActual: ${actual}`
+        );
     }
 
-    async clickBookNow() {
-        await (await this.bookLink).click();
-    }
+    async verifyPromoInvalid(expectedMsg: string) {
+        await this.promoMessage.waitForDisplayed({ timeout: 5000 });
+        const actual = await this.promoMessage.getText();
 
-    async clickLogo() {
-        await (await this.logo).click();
+        expect(actual).to.equal(
+            expectedMsg,
+            `Invalid promo message is incorrect.\nExpected: ${expectedMsg}\nActual: ${actual}`
+        );
     }
-
-    async verifyPromoApplied(code: string, discount: string): Promise<boolean> {
-        const message = await this.getPromoMessageText();
-        return message !== null &&
-           message.includes(code) &&
-           message.includes(`${discount}%`);
-        }
-        
-    async verifyPromoInvalid(code: string): Promise<boolean> {
-        const message = await this.getPromoMessageText();
-        return message !== null &&
-            message.includes('Sorry') &&
-            message.includes(code) &&
-            message.includes('not valid');
-        }
 }

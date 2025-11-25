@@ -1,14 +1,16 @@
 import BookingPage from '../pages/BookingPage';
-import { expect } from 'chai';
 import returnDateScenarios from '../data/bookingDateValidationTestData.json';
+import ResultsPage from '../pages/ResultsPage';
 
+const SEAT_AVAILABLE_MSG = 'Seats available! Call 0800 MARSAIR to book!';
+const SEAT_UNAVAILABLE_MSG = 'Unfortunately, this schedule is not possible'
 describe('MarsAir Booking Date Validation', () => {
     const booking = new BookingPage();
-
+    const resultsPage = new ResultsPage();
+    
     beforeEach(async () => {
-        await booking.open();
+        await booking.open('https://marsair.recruiting.thoughtworks.net/NghiemN');
     });
-
     returnDateScenarios.forEach(({ departure, return: ret, valid, description }) => {
         const testTitle = valid
             ? `should allow valid trip when ${description}`
@@ -20,11 +22,9 @@ describe('MarsAir Booking Date Validation', () => {
             await booking.clickSearch();
 
             if (valid) {
-                const msg = await $('#seats-message'); // update selector as necessary
-                expect(await msg.getText()).to.not.include('Unfortunately');
+                await resultsPage.verifySeatsAvailability(SEAT_AVAILABLE_MSG);
             } else {
-                const errorMsg = await $('#error-message'); // update selector as necessary
-                expect(await errorMsg.getText()).to.include('Unfortunately, this schedule is not possible');
+                await resultsPage.verifySeatsAvailability(SEAT_UNAVAILABLE_MSG);
             }
         });
     });

@@ -1,15 +1,40 @@
+const BOOKING_JOURNEY = [
+    './tests/ui/searchAndBookingFlow.ts'
+];
+
+const BOOKING_DATE_VALIDATION = [
+    './tests/ui/bookingDateValidation.ts'
+];
+
+const PROMO_CODE_VALIDATION = [
+    './tests/ui/promoCodeValidation.ts'
+];
+
+const HOME_NAVIGATION = [
+    './tests/ui/homeNavigation.ts'
+];
+
 export const config = {
     runner: 'local',
     specs: [
-        // './features/**/*.feature',
-        './src/tests/**/*.ts'
+        // './src/tests/**/*.ts',
+        ...BOOKING_JOURNEY,
+        // ...BOOKING_DATE_VALIDATION,
+        // ...PROMO_CODE_VALIDATION,
+        // ...HOME_NAVIGATION
     ],
     maxInstances: 1,
     capabilities: [{
         maxInstances: 1,
-        browserName: 'chrome'
+        browserName: 'chrome',
+        'goog:chromeOptions': {
+        args: [
+            // '--headless=new', 
+            '--disable-gpu', 
+            '--window-size=1920,1080']
+    }
     }],
-    logLevel: 'info',
+    logLevel: 'error',
     bail: 0,
     waitforTimeout: 10000,
     connectionRetryTimeout: 120000,
@@ -20,11 +45,12 @@ export const config = {
 
     mochaOpts: {
         ui: 'bdd',
-        timeout: 60000,
-        require: ['ts-node/register']
+        timeout: 60000
     },
 
-    services: ['devtools'],
+    // Commenting out devtools service to prevent Chrome opening with DevTools by default
+    // services: ['devtools'],
+    services: [],
 
     autoCompileOpts: {
         autoCompile: true,

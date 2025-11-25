@@ -1,36 +1,47 @@
 import BookingPage from '../pages/BookingPage';
-import { expect } from 'chai';
+import ResultsPage from '../pages/ResultsPage';
 import promoCodes from '../data/promoCodeTestData.json';
+import { expect } from 'chai';
+
+const booking = new BookingPage();
+const resultsPage = new ResultsPage();
 
 describe('MarsAir Promotional Codes', () => {
-    const booking = new BookingPage();
 
     beforeEach(async () => {
-        await booking.open();
+        await booking.open('https://marsair.recruiting.thoughtworks.net/NghiemN');
     });
 
-    promoCodes.valid.forEach(({ code }) => {
+    // VALID PROMO CODES
+    promoCodes.valid.forEach(({ code, discount }) => {
         it(`Valid promo code: ${code}`, async () => {
-            await booking.enterPromo(code);
+            await booking.enterPromoCode(code);
             await booking.clickSearch();
-            const message = await $('#promo-message'); // update selector as necessary
-            expect(await message.getText()).to.include(`Promotional code ${code} used`);
+
+            const expectedText = `Promotional code ${code} used: ${discount}% discount!`;
+
+            await resultsPage.verifyPromoApplied(code, discount, expectedText);
         });
     });
 
+    // INVALID PROMO CODES
     promoCodes.invalid.forEach((invalidCode) => {
         it(`Invalid promo code: ${invalidCode}`, async () => {
-            await booking.enterPromo(invalidCode);
+            await booking.enterPromoCode(invalidCode);
             await booking.clickSearch();
-            const message = await $('#promo-message'); // update selector as necessary
-            expect(await message.getText()).to.include(`Sorry, code ${invalidCode} is not valid`);
+
+            const expectedText = `Sorry, code ${invalidCode} is not valid`;
+
+            await resultsPage.verifyPromoInvalid(expectedText);
         });
     });
 
+    // EMPTY PROMO CODE
     it('Empty promotional code proceeds without discount', async () => {
-        await booking.enterPromo('');
+        await booking.enterPromoCode('');
         await booking.clickSearch();
-        const message = await $('#promo-message'); // may verify no discount message or absence of error
-        expect(await message.isExisting()).to.be.false;
+
+        const isMessageShown = await $('#promo-message').isExisting();
+        expect(isMessageShown).to.be.false;
     });
 });

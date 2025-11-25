@@ -13,16 +13,9 @@ pids
 *.seed
 *.pid.lock
 
-# Coverage directory used by tools like istanbul
-coverage/
-
 # Output of build process
 dist/
 build/
-
-# Temporary folders and files
-tmp/
-temp/
 
 # TypeScript cache
 *.tsbuildinfo
@@ -35,26 +28,6 @@ temp/
 # VSCode settings
 .vscode/
 
-# Jest cache
-jest-cache/
-jest-report/
-
 # Cucumber reports
 reports/
 cucumber-report.json
-
-# nyc code coverage
-.nyc_output/
-
-# Misc
-.DS_Store
-.idea/
-*.sublime-workspace
-*.sublime-project
-
-# Test artifacts
-*.tmp
-*.temp
-*.bak
-*.swp
-*.old
