@@ -1,12 +1,17 @@
 {
   "compilerOptions": {
     "target": "ES2021",
+    "outDir": "./build",
+    "rootDir":"./",
     "module": "commonjs",
     "lib": ["ES2021", "DOM"],
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "types": ["node", "webdriverio", "@wdio/cucumber-framework", "@wdio/globals/types"]
+    "types": ["node", "webdriverio", "@wdio/mocha-framework", "@wdio/globals/types", "mocha"],
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node"
   },
   "include": ["./**/*.ts"]
 }

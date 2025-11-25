@@ -1,37 +1,56 @@
+const BOOKING_JOURNEY = [
+    './tests/ui/searchAndBookingFlow.ts'
+];
+
+const BOOKING_DATE_VALIDATION = [
+    './tests/ui/bookingDateValidation.ts'
+];
+
+const PROMO_CODE_VALIDATION = [
+    './tests/ui/promoCodeValidation.ts'
+];
+
+const HOME_NAVIGATION = [
+    './tests/ui/homeNavigation.ts'
+];
+
 export const config = {
     runner: 'local',
     specs: [
-        './features/**/*.feature'
+        // './src/tests/**/*.ts',
+        ...BOOKING_JOURNEY,
+        // ...BOOKING_DATE_VALIDATION,
+        // ...PROMO_CODE_VALIDATION,
+        // ...HOME_NAVIGATION
     ],
     maxInstances: 1,
     capabilities: [{
         maxInstances: 1,
-        browserName: 'chrome'
+        browserName: 'chrome',
+        'goog:chromeOptions': {
+        args: [
+            // '--headless=new', 
+            '--disable-gpu', 
+            '--window-size=1920,1080']
+    }
     }],
-    logLevel: 'info',
+    logLevel: 'error',
     bail: 0,
-    baseUrl: 'http://localhost',
     waitforTimeout: 10000,
     connectionRetryTimeout: 120000,
     connectionRetryCount: 3,
 
-    framework: 'cucumber',
+    framework: 'mocha',
     reporters: ['spec'],
 
-    cucumberOpts: {
-        require: ['./step-definitions/*.ts'],
-        requireModule: ['ts-node/register'],
-        backtrace: false,
-        failAmbiguousDefinitions: true,
-        failFast: false,
-        ignoreUndefinedDefinitions: false,
-        strict: true,
-        timeout: 60000,
-        tagsInTitle: false,
+    mochaOpts: {
+        ui: 'bdd',
+        timeout: 60000
     },
 
-    services: ['devtools'],
-
+    // Commenting out devtools service to prevent Chrome opening with DevTools by default
+    // services: ['devtools'],
+    services: [],
 
     autoCompileOpts: {
         autoCompile: true,

@@ -1,0 +1,92 @@
+[
+  {
+    "departure": "July",
+    "return": "July (Next year)",
+    "valid": true,
+    "description": "Return exactly 1 year from July"
+  },
+  {
+    "departure": "July",
+    "return": "July (Next two years from now)",
+    "valid": true,
+    "description": "Return more than 1 year from July"
+  },
+  {
+    "departure": "July",
+    "return": "December",
+    "valid": false,
+    "description": "Return less than 1 year from July"
+  },
+  {
+    "departure": "July",
+    "return": "December (Next year)",
+    "valid": true,
+    "description": "Return more than 1 year from July"
+  },
+  {
+    "departure": "July",
+    "return": "December (Next two years from now)",
+    "valid": true,
+    "description": "Return more than 1 year from July"
+  },
+  {
+    "departure": "July (Next year)",
+    "return": "July (Next two years from now)",
+    "valid": true,
+    "description": "Return exactly 1 year from July (Next year)"
+  },
+  {
+    "departure": "July (Next year)",
+    "return": "December (Next year)",
+    "valid": false,
+    "description": "Return less than 1 year from July (Next year)"
+  },
+  {
+    "departure": "July (Next year)",
+    "return": "December (Next two years from now)",
+    "valid": true,
+    "description": "Return more than 1 year from July (Next year)"
+  },
+  {
+    "departure": "July (Next two years from now)",
+    "return": "December (Next two years from now)",
+    "valid": false,
+    "description": "Return less than 1 year from July (Next two years)"
+  },
+  {
+    "departure": "December",
+    "return": "December (Next year)",
+    "valid": true,
+    "description": "Return exactly 1 year from December"
+  },
+  {
+    "departure": "December",
+    "return": "December (Next two years from now)",
+    "valid": true,
+    "description": "Return more than 1 year from December"
+  },
+  {
+    "departure": "December",
+    "return": "July (Next year)",
+    "valid": false,
+    "description": "Return before departure in July (Next year)"
+  },
+  {
+    "departure": "December (Next year)",
+    "return": "July (Next two years from now)",
+    "valid": true,
+    "description": "Return after departure in July (Next two years)"
+  },
+  {
+    "departure": "December (Next year)",
+    "return": "July (Next year)",
+    "valid": false,
+    "description": "Return before departure in July (Next year)"
+  },
+  {
+    "departure": "December (Next two years from now)",
+    "return": "July",
+    "valid": false,
+    "description": "Return before departure in July"
+  }
+]
